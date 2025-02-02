@@ -11,7 +11,7 @@
 const props = defineProps<{
     onClick: () => void
     altText: string
-    title: string
+    title?: string
     disabled?: boolean
 }>()
 </script>
