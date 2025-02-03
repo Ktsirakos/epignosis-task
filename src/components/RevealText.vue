@@ -1,6 +1,6 @@
 <template>
     <p :class="[`transition-opacity ${props.value ? 'opacity-100' : 'opacity-0'} ease-in
-    duration-1000`, props.class]">
+    duration-500`, props.class]">
         {{ props.value }}</p>
 </template>
 
