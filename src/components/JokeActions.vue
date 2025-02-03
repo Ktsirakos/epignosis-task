@@ -1,0 +1,41 @@
+<template>
+    <div class="flex flex-1 items-center gap-10 w-full justify-center">
+        <IconButton alt-text="Get a new joke" title="Get a joke" @click="getARandomJoke">
+            <template #icon>
+                <RotateCw :class="`${loadingJoke ? 'animate-spin' : ''}`" :size="iconSize" />
+            </template>
+        </IconButton>
+        <IconButton :disabled="!joke?.setup || isJokeAlreadySaved()" alt-text="Save joke"
+            :title="isJokeAlreadySaved() ? 'Saved' : 'Save'" @click="() => emit('show-modal')">
+            <template #icon>
+                <Save :size="iconSize" />
+            </template>
+        </IconButton>
+    </div>
+</template>
+
+<script setup lang="ts">
+import type { Joke } from '@/interfaces/joke';
+import { getJokes } from '@/services/api';
+import { useJokeStore } from '@/store/jokeStore';
+import IconButton from '@/components/IconButton.vue';
+import { Save, RotateCw } from 'lucide-vue-next';
+import { ref } from 'vue';
+
+const emit = defineEmits(['show-modal', 'joke'])
+const joke = ref<Joke | undefined>(undefined)
+const jokeStore = useJokeStore()
+const iconSize = 72
+const loadingJoke = ref(false) //variable used to spin the loading button
+
+
+const isJokeAlreadySaved = () => {
+    return !!jokeStore.savedJokes.find(e => e.id === joke.value?.id)
+}
+const getARandomJoke = async () => {
+    loadingJoke.value = true
+    joke.value = await getJokes()
+    emit('joke', joke.value)
+    loadingJoke.value = false
+}
+</script>

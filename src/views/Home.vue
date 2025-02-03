@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import IconButton from "@/components/IconButton.vue"
-import { RotateCw, Save } from "lucide-vue-next";
-import { getJokes } from "@/services/api";
 import { ref } from "vue";
 import { useJokeStore } from "@/store/jokeStore";
 import type { Joke } from "@/interfaces/joke";
@@ -10,16 +7,13 @@ import JokeCard from "@/components/JokeCard.vue";
 import Modal from "@/components/Modal.vue"
 import Stars from "@/components/Stars.vue"
 import { X } from "lucide-vue-next";
-const iconSize = 72
+import JokeActions from "@/components/JokeActions.vue";
+
 const joke = ref<Joke | undefined>(undefined)
 const jokeStore = useJokeStore()
-const loadingJoke = ref(false) //variable used to spin the loading button
 const jokeRating = ref(0)
 
 const showSaveModal = ref(false)
-const isJokeAlreadySaved = () => {
-  return !!jokeStore.savedJokes.find(e => e.id === joke.value?.id)
-}
 
 
 const saveJokeWithRating = () => {
@@ -30,14 +24,7 @@ const saveJokeWithRating = () => {
     rating: jokeRating.value
   })
 
-  console.log('hey')
   showSaveModal.value = false
-}
-
-const getARandomJoke = async () => {
-  loadingJoke.value = true
-  joke.value = await getJokes()
-  loadingJoke.value = false
 }
 
 </script>
@@ -47,19 +34,7 @@ const getARandomJoke = async () => {
     <div class="flex-1 grid grid-col-1">
       <JokeCard :joke="joke" />
     </div>
-    <div class="flex flex-1 items-center gap-10 w-full justify-center">
-      <IconButton alt-text="Get a new joke" title="Reload" @click="getARandomJoke">
-        <template #icon>
-          <RotateCw :class="`${loadingJoke ? 'animate-spin' : ''}`" :size="iconSize" />
-        </template>
-      </IconButton>
-      <IconButton :disabled="!joke?.setup || isJokeAlreadySaved()" alt-text="Save joke"
-        :title="isJokeAlreadySaved() ? 'Saved' : 'Save'" @click="() => showSaveModal = true">
-        <template #icon>
-          <Save :size="iconSize" />
-        </template>
-      </IconButton>
-    </div>
+    <JokeActions @joke="(newJoke) => joke = newJoke" @show-modal="() => showSaveModal = true" />
   </div>
   <Modal :isOpen="showSaveModal">
     <div class="flex flex-col justify-between h-full items-center">
