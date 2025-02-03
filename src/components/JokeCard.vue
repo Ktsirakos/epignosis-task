@@ -1,5 +1,5 @@
 <template>
-    <div class="p-10 rounded-lg border-2 border-amber-400">
+    <div class="p-10 rounded-lg border-1">
         <div v-if="props.joke" class="h-full flex flex-col justify-evenly">
             <RevealText class="text-4xl" :value="setup" />
             <RevealText class="text-6xl" :value="punchline" />
