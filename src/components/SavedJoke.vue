@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-5 items-start border-black-100 border-2 p-5 rounded-xl w-1/2">
+    <div class="flex flex-col gap-5 items-start border-black-100 border-2 p-5 rounded-xl">
         <p class="text-md">
             {{ props.joke.setup }}
         </p>
