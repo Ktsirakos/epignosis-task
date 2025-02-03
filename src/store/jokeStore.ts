@@ -12,7 +12,6 @@ export const useJokeStore = defineStore('jokeStore', () => {
         averageRating.value = savedJokes.value.reduce(
             (acc, curr) => acc + curr.rating, 0) / savedJokes.value.length
 
-        console.log(averageRating)
         localStorage.setItem('jokes', JSON.stringify(savedJokes.value))
     }
 

@@ -26,8 +26,7 @@ const shouldShowStar = (starIndex: number) => {
     if (starIndex < rating.value) return true
 }
 
-watch(rating, (newRating, oldRating) => {
-    console.log({newRating, oldRating})
+watch(rating, (newRating) => {
     emit('change', newRating)
 })
 </script>

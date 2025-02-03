@@ -39,7 +39,6 @@ const updateFilteredJokes = (data: {
   rating: number,
   order: Order
 }) => {
-  console.log(data.rating)
   const allJokes = [...jokeStore.savedJokes]
 
   //Filtering according to rating. In case 0 we reset the view to all jokes

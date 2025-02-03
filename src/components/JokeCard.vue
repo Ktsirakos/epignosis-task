@@ -22,8 +22,7 @@ const setup = ref("")
 const punchline = ref("")
 const showDrumroll = ref(false)
 
-watch(() => props.joke, (newJoke, oldJoke) => {
-    console.log({newJoke, oldJoke})
+watch(() => props.joke, () => {
     if(!props.joke) {
         setup.value = ""
         punchline.value = ""

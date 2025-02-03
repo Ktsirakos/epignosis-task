@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ArrowDownAz, ArrowUpAz } from 'lucide-vue-next';
 import Stars from '@/components/Stars.vue';
-import { ref, watch, type Ref } from 'vue';
+import { ref } from 'vue';
 
 export type Order = 'asc' | 'desc' | 'none'
 const emit = defineEmits(['change']) //fix that
@@ -33,6 +33,7 @@ const selectedRating = ref(0)
 const order = ref<Order>('none')
 
 const selectRatingFilter = (index: number) => {
+    order.value = 'none'
     if (selectedRating.value === index) {
         selectedRating.value = 0
         emit("change", {
@@ -48,17 +49,15 @@ const selectRatingFilter = (index: number) => {
 }
 
 const changeOrder = (newOrder: Order) => {
+    selectedRating.value = 0
     if (order.value === newOrder) {
         order.value = 'none'
         return;
     }
 
     order.value = newOrder
-}
-
-watch(order, (newOrder) => {
     emit('change', {
         order: newOrder
     })
-})
+}
 </script>
