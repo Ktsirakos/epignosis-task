@@ -56,3 +56,7 @@ h1 {
     background-color: #f9f9f9;
   }
 }
+
+button {
+  cursor: pointer;
+}
