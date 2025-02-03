@@ -9,6 +9,7 @@ import JokeCard from "@/components/JokeCard.vue";
 
 import Modal from "@/components/Modal.vue"
 import Stars from "@/components/Stars.vue"
+import { X } from "lucide-vue-next";
 const iconSize = 72
 const joke = ref<Joke | undefined>(undefined)
 const jokeStore = useJokeStore()
@@ -62,7 +63,12 @@ const getARandomJoke = async () => {
   </div>
   <Modal :isOpen="showSaveModal">
     <div class="flex flex-col justify-between h-full items-center">
-      <p class="text-white">How would you rate this joke?</p>
+      <div class="flex flex-row justify-between w-full">
+        <p class="text-white">How would you rate this joke?</p>
+        <button class="text-red-500" @click="showSaveModal = false">
+          <X />
+        </button>
+      </div>
       <Stars :stars="4" :mode="'input'" @change="(rating) => jokeRating = rating" />
       <button class="py-1 px-4 text-xl hover:text-yellow-300" @click="saveJokeWithRating">Save</button>
     </div>

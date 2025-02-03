@@ -13,8 +13,8 @@ const target = ref(null)
 
 <template>
   <div v-if="props.isOpen" class="modal-mask">
-    <div class="modal-wrapper">
-      <div class="w-1/4 h-50 bg-stone-700 border-stone-200 border-2 rounded-xl" ref="target">
+    <div class="h-full flex justify-center items-center ">
+      <div class="w-1/3 h-50 bg-stone-700 border-stone-200 border-2 rounded-xl" ref="target">
         <div class="modal-body h-full w-full p-3">
           <slot></slot>
         </div>
@@ -36,10 +36,9 @@ const target = ref(null)
 }
 
 .modal-container {
-position: relative;
+  position: relative;
   width: 300px;
   margin: 0 auto;
   padding: 50px;
 }
-
 </style>
