@@ -4,6 +4,7 @@
         ${$route.path === '/' ? 'selected' : 'non-selected'}`" to="/">
             Home
         </RouterLink>
+        <div class="divider" />
         <RouterLink :class="$route.path === '/joke-list' ? 'selected' : 'non-selected'" to="/joke-list">
             Saved Jokes
         </RouterLink>
@@ -22,5 +23,10 @@ import { RouterLink } from 'vue-router';
 
 .non-selected {
     color: gray
+}
+
+.divider {
+    width: 1px;
+    background: grey;
 }
 </style>
