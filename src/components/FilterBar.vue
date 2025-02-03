@@ -12,11 +12,11 @@
         </div>
         <p class="text-start">Sort by:</p>
         <div class="flex flex-row gap-4">
-            <button @click="ascAlphabeticalOrder = true">
-                <ArrowDownAz :color="ascAlphabeticalOrder ? 'yellow' : ''" />
+            <button @click="() => changeOrder('asc')">
+                <ArrowDownAz :color="order === 'asc' ? 'yellow' : ''" />
             </button>
-            <button @click="ascAlphabeticalOrder = false">
-                <ArrowUpAz :color="!ascAlphabeticalOrder ? 'yellow' : ''" />
+            <button @click="() => changeOrder('desc')">
+                <ArrowUpAz :color="order === 'desc' ? 'yellow' : ''" />
             </button>
         </div>
     </div>
@@ -25,27 +25,40 @@
 <script setup lang="ts">
 import { ArrowDownAz, ArrowUpAz } from 'lucide-vue-next';
 import Stars from '@/components/Stars.vue';
-import { ref, watch } from 'vue';
+import { ref, watch, type Ref } from 'vue';
 
-const emit = defineEmits(['']) //fix that
+export type Order = 'asc' | 'desc' | 'none'
+const emit = defineEmits(['change']) //fix that
 const selectedRating = ref(0)
-const ascAlphabeticalOrder = ref(true)
+const order = ref<Order>('none')
 
 const selectRatingFilter = (index: number) => {
     if (selectedRating.value === index) {
         selectedRating.value = 0
-
+        emit("change", {
+            rating: 0
+        })
         return;
     }
 
     selectedRating.value = index
+    emit("change", {
+        rating: index
+    })
 }
 
-watch(ascAlphabeticalOrder, (newOrder) => {
-    if (newOrder) {
-
-    } else {
-
+const changeOrder = (newOrder: Order) => {
+    if (order.value === newOrder) {
+        order.value = 'none'
+        return;
     }
+
+    order.value = newOrder
+}
+
+watch(order, (newOrder) => {
+    emit('change', {
+        order: newOrder
+    })
 })
 </script>
