@@ -17,10 +17,12 @@ export const useJokeStore = defineStore('jokeStore', () => {
     }
 
     const removeJoke = (jokeId: number) => {
-
         savedJokes.value = savedJokes.value.filter(e => e.id !== jokeId)
         averageRating.value = savedJokes.value.reduce(
             (acc, curr) => acc + curr.rating, 0) / savedJokes.value.length
+
+        localStorage.setItem('jokes', JSON.stringify(savedJokes.value))
+
     }
 
     const initStore = (data: Joke[]) => {

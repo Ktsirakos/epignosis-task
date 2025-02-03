@@ -19,11 +19,15 @@
 import { useJokeStore } from '@/store/jokeStore';
 import SavedJoke from '@/components/SavedJoke.vue';
 import Search from "@/components/Search.vue"
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { transformJokeToSearchableString } from '@/utils/helpers';
 import FilterSidebar, { type Order } from '@/components/FilterBar.vue';
 import { Star } from 'lucide-vue-next';
 const jokeStore = useJokeStore()
+
+watch(() => jokeStore.savedJokes, (newJokes) => {
+  filteredJokes.value = newJokes
+})
 const filteredJokes = ref([...jokeStore.savedJokes])
 
 const filterJokes = (query: string) => {

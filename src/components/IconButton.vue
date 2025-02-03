@@ -1,6 +1,13 @@
 <template>
     <button :disabled="disabled"
-        :class="`flex flex-col items-center gap-5 p-5 bg-black rounded-xl ${disabled ? 'opacity-20' : 'opacity-100'}`"
+        :class="`
+            flex flex-col items-center 
+            gap-5 
+            p-5 
+            rounded-xl
+            ${disabled ? 'opacity-20' : 'opacity-100'}
+            hover:bg-black 
+        `"
         @click="props.onClick" :alt-text="props.altText">
         <slot name="icon"></slot>
         <p v-if="title" class="text-xl text-center">{{ title }}</p>
