@@ -22,7 +22,7 @@
 import type { Joke } from '@/interfaces/joke';
 import { useJokeStore } from '@/store/jokeStore';
 import { X } from "lucide-vue-next"
-import Stars from './Stars.vue';
+import Stars from '@/components/Stars.vue'
 
 const jokeStore = useJokeStore()
 const props = defineProps<{

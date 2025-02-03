@@ -1,7 +1,7 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 
-import Home from './views/Home.vue'
-import JokesList from './views/JokesList.vue'
+import Home from '@/views/Home.vue'
+import JokesList from '@/views/JokesList.vue'
 
 const routes = [
   { path: '/', component: Home },

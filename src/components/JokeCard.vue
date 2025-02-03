@@ -10,8 +10,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import type { Joke } from '../interfaces/joke';
-import RevealText from './RevealText.vue';
+import type { Joke } from '@/interfaces/joke';
+import RevealText from '@/components/RevealText.vue';
 import { Drum } from 'lucide-vue-next';
 
 const props = defineProps<{
