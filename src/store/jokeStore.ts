@@ -8,11 +8,17 @@ export const useJokeStore = defineStore('jokeStore', () => {
     const saveJoke = (joke?: Joke) => {
         if (!joke) return;
         savedJokes.value.push(joke)
+
+        localStorage.setItem('jokes', JSON.stringify(savedJokes.value))
     }
 
     const removeJoke = (jokeId: number) => {
         savedJokes.value = savedJokes.value.filter(e => e.id !== jokeId)
     }
 
-    return { savedJokes, saveJoke, removeJoke }
+    const initStore = (data: Joke[]) => {
+        savedJokes.value = data
+    }
+
+    return { savedJokes, initStore, saveJoke, removeJoke }
 })
